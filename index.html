@@ -7,6 +7,7 @@
     <title>Arvind Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 </head>
 
@@ -71,7 +72,7 @@
                 </div>
 
             </section>
-            <!--abouot section start here-->
+            <!--abouot section start here------------------->
 
             <section class="about" id="about">
                 <div class="section-banner">
@@ -90,7 +91,7 @@
                         <p>Tech enthusiast and BCA professional passionate about applying programming skills and
                             creative problem-solving in dynamic environments. Eager to contribute to innovative projects
                             and drive mutual success in a forward-thinking organization.</p>
-                        <a href="#" target="_blank">Download Resume</a>
+                        <a href="/images/arvind.pdf" target="_blank">Download Resume</a>
                     </div>
                 </div>
                 <!--abouot section end here-->
@@ -428,6 +429,67 @@
                     this.start();
                 });
             });
+            let scene = new THREE.Scene();
+        let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        let renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        let mouse = new THREE.Vector2();
+        let targetMouse = new THREE.Vector2(); // Smooth motion ke liye
+
+        document.addEventListener("mousemove", (event) => {
+            targetMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            targetMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        function createRipple() {
+            let rings = [];
+            for (let i = 0; i < 5; i++) {
+                let geometry = new THREE.RingGeometry(0.05 + i * 0.03, 0.07 + i * 0.03, 32); // Size bada kiya
+                let material = new THREE.MeshBasicMaterial({ 
+                    color: 0xffa500, 
+                    side: THREE.DoubleSide, 
+                    transparent: true, 
+                    opacity: 0.7 - i * 0.15 
+                });
+                let ring = new THREE.Mesh(geometry, material);
+                rings.push(ring);
+                scene.add(ring);
+            }
+            return rings;
+        }
+
+        let ripple = createRipple();
+
+        camera.position.z = 5;
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Smooth cursor movement (to remove lag)
+            mouse.x += (targetMouse.x - mouse.x) * 0.9;
+            mouse.y += (targetMouse.y - mouse.y) * 0.9;
+
+            ripple.forEach((ring, index) => {
+                ring.position.x = mouse.x * 2;
+                ring.position.y = mouse.y * 2;
+
+                let scaleFactor = 0.8 + Math.sin(Date.now() * 0.002 + index) * 0.3;
+                ring.scale.set(scaleFactor, scaleFactor, 1);
+                ring.material.opacity = 0.6 + Math.sin(Date.now() * 0.002 + index) * 0.3;
+            });
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener("resize", () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        });
+
         </script>
 </body>
 

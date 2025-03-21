@@ -67,7 +67,7 @@ function padZero(number) {
 }
 
 function updateAge() {
-  const dob = '2005-10-04T05:27:00';
+  const dob = '2005-10-02T05:27:00';
   const age = calculateAge(dob);
 
   document.getElementById('y').innerText = padZero(age.years);
