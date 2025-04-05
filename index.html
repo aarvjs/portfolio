@@ -49,8 +49,13 @@
         </nav>
 
         <div class="sections">
+            <div class="three-bg"></div>
+            <canvas id="universe"></canvas>
+            <div class="glow-effect-box"></div>
 
             <section class="home" id="home">
+
+
                 <div class="home-content">
                     <div class="text-1">Hello, my name is</div>
                     <div class="text-2">
@@ -414,6 +419,10 @@
                         class="sm-icon fa-brands fa-square-facebook"></i></a>
             </div>
         </div>
+        <script type="module" src="three.js"></script>
+        <script src="bacgroud.js"></script>
+
+          
         <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
         <script src="script.js"></script>
         <script>
@@ -429,6 +438,8 @@
                     this.start();
                 });
             });
+
+            
             let scene = new THREE.Scene();
         let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         let renderer = new THREE.WebGLRenderer({ alpha: true });
@@ -489,6 +500,9 @@
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
         });
+
+
+        
 
         </script>
 </body>

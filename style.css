@@ -292,18 +292,59 @@ body {
 }
 
 /* home page designing */
-
-.home {
-  display: flex;
-  align-items: center;
-  padding-left: 2rem;
-  background: var(--home-bg) no-repeat center;
-  background-size: cover;
+.three-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100vh;
-  /* min-height: 500px; */
-  color: var(--home-color);
-  background-attachment: fixed;
+  z-index: 0;
+  pointer-events: none;
 }
+/* .home { */
+  /* position: relative; */
+  /* z-index: 2;
+  display: flex;
+  /* align-items: center; */
+  /* padding-left: 2rem;
+  height: 100vh;
+  color: var(--home-color);
+  background: transparent; */
+/* }  */
+.home { 
+  display: flex; 
+   align-items: center; 
+    padding-left: 2rem; 
+  /* background: var(--home-bg) no-repeat center; */
+   /* background-size: cover;  */
+  height: 100vh; 
+   min-height: 500px;
+  color: var(--home-color);
+  /* background-attachment: fixed; */
+  background: transparent;
+}
+
+.glow-effect-box {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 60vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(circle at right, rgba(255, 200, 100, 0.2), transparent 70%);
+  animation: glowMove 5s ease-in-out infinite alternate;
+}
+
+/* @keyframes glowMove {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-30px);
+  }
+} */
+
 
 .home-content {
   padding: 1rem;
@@ -400,6 +441,7 @@ body {
   filter: drop-shadow(0 0 150px var(--main-color));
   transition: 1s;
 }
+
 
 .about .about-content .right {
   margin-right: 2.5rem;
