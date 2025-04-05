@@ -20,7 +20,7 @@ canvas {
   --year-color: #ffffff;
   --bg-noise-img: url(images/bg_noise.png);
   --bg-img: url(images/bg_noise.png);
-  --home-bg: url(images/dp6.jpg);
+  /* --home-bg: url(images/dp6.jpg); */
   --text-color: #ffffff;
   /* --main-color: #ff9900; */
   --main-color: #5778dd;
@@ -44,7 +44,7 @@ body {
 
 .light-mode {
   --bg-img: url(images/bg.png);
-  --home-bg: url(images/ram3.jpg);
+  /* --home-bg: url(images/ram3.jpg); */
   --text-color: #151515;
   /* --main-color: purple; */
   --main-color: crimson;
