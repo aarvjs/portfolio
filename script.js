@@ -1,4 +1,5 @@
 let mode = document.querySelector(".day-night-mode");
+// let text = document.getElementById(".black");
 
 mode.addEventListener("click", () => {
   // console.log("button click to ho rha hai");
@@ -7,6 +8,8 @@ mode.addEventListener("click", () => {
     mode.innerHTML = '<i class="fa-solid fa-moon"></i>';
   } else {
     mode.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    // text.style.color("black");
+
   }
 });
 
@@ -21,8 +24,8 @@ function startTypingAnimation(selector, strings) {
     loop: true,
   });
 }
-startTypingAnimation(".typing-2", ["Student", "Web Developer", "Programmer"]);
-startTypingAnimation(".typing", ["Student", "Web Developer", "Programmer"]);
+startTypingAnimation(".typing-2", ["Student", "Web Developer", "Programmer","Freelancer"]);
+startTypingAnimation(".typing", ["Student", "Web Developer", "Programmer","Freelancer"]);
 
 // ========================== Age Timer start ==========================
 

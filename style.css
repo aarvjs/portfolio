@@ -125,18 +125,25 @@ body {
   border: 3px solid var(--nav-hover-color);
   border-radius: 40px 40px 40px 10px;
   transition: 0.5s;
-  background-color: rgb(87, 132, 184);
+  background-color: rgba(187, 186, 195);
   overflow: hidden;
   width: 7.5rem;
   height: 135px;
   margin-left: 1rem;
   margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .logo img {
-  height: 135px;
+  width: 100%;
+  height: 100%;
+  transform: scale(1.3); /* thoda zoom karegi (1.2 = 20% zoom) */
+  object-fit: contain; /* ✅ image fit karega without distortion */
   transition: all 0.8s cubic-bezier(0.2, 0.6, 0.2, 1);
 }
+
 
 .logo img:hover {
   transform: scale(1.15);
@@ -1113,9 +1120,8 @@ body {
 
 
 
-/* email page start here? */
-
-.messg{
+  /* email page start here? */
+.messg {
     width: 50%;
     margin-left: 5vh;
     display: flex;
@@ -1126,6 +1132,7 @@ body {
 form {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 label {
@@ -1134,10 +1141,8 @@ label {
     margin-bottom: 5px;
 }
 
-
 input,
 textarea {
-    /* width: 100%; */
     margin-bottom: 30px;
     padding: 10px;
     font-size: 16px;
@@ -1146,6 +1151,8 @@ textarea {
     background: none;
     outline: none;
     color: rgb(18, 17, 17);
+    width: 100%; /* full width */
+    box-sizing: border-box;
 }
 
 input:hover,
@@ -1154,10 +1161,9 @@ textarea:hover {
 }
 
 button {
-  width: 20vh;
+    width: 20vh;
     align-self: flex-start;
     padding: 10px 20px;
-    border: 2px solid var(--main-color);
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
@@ -1174,7 +1180,56 @@ button:hover {
     color: white;
 }
 
+/* 📱 Responsive Design */
+@media (max-width: 1024px) {
+    .messg {
+        width: 70%;
+        margin-left: 0;
+    }
 
+    button {
+        width: 30%;
+        align-self: center;
+    }
+}
 
+@media (max-width: 768px) {
+    .messg {
+        width: 90%;
+        margin: 0 auto;
+        padding: 10px;
+    }
 
-/* email end here? */
+    label {
+        font-size: 16px;
+    }
+
+    button {
+        width: 40%;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .messg {
+        width: 100%;
+        margin: 0 auto;
+        padding: 10px;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    input,
+    textarea {
+        font-size: 14px;
+    }
+
+    button {
+        width: 100%;
+        font-size: 0.9rem;
+        padding: 12px;
+        align-self: center;
+    }
+}

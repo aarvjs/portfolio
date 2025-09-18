@@ -4,7 +4,15 @@
 int main() {
     int gd = DETECT, gm;
     initgraph(&gd, &gm, "");
-    circle(250, 200, 50);
+
+
+    setcolor(DARKGRAY);
+    setfillstyle(SOLID_FILL,DARKGRAY);
+    rectangle(0,370,getmaxx(),getmaxy());
+    floodfill(1,371,DARKGRAY);
+
+
+   
     getch();
     closegraph();
     return 0;
