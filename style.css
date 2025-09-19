@@ -20,7 +20,7 @@ canvas {
   --year-color: #ffffff;
   --bg-noise-img: url(images/bg_noise.png);
   --bg-img: url(images/bg_noise.png);
-  /* --home-bg: url(images/dp6.jpg); */
+  --home-bg: url(images/dp6.jpg);
   --text-color: #ffffff;
   /* --main-color: #ff9900; */
   --main-color: #5778dd;
@@ -44,7 +44,7 @@ body {
 
 .light-mode {
   --bg-img: url(images/bg.png);
-  /* --home-bg: url(images/ram3.jpg); */
+  --home-bg: url(images/ram3.jpg);
   --text-color: #151515;
   /* --main-color: purple; */
   --main-color: crimson;
@@ -299,7 +299,7 @@ body {
 }
 
 /* home page designing */
-.three-bg {
+/* .three-bg {
   position: fixed;
   top: 0;
   left: 0;
@@ -307,7 +307,7 @@ body {
   height: 100vh;
   z-index: 0;
   pointer-events: none;
-}
+} */
 /* .home { */
   /* position: relative; */
   /* z-index: 2;
@@ -322,12 +322,12 @@ body {
   display: flex; 
    align-items: center; 
     padding-left: 2rem; 
-  /* background: var(--home-bg) no-repeat center; */
-   /* background-size: cover;  */
+  background: var(--home-bg) no-repeat center;
+   background-size: cover; 
   height: 100vh; 
    min-height: 500px;
   color: var(--home-color);
-  /* background-attachment: fixed; */
+  background-attachment: fixed;
   background: transparent;
 }
 
