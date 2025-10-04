@@ -53,12 +53,77 @@
         opacity: 0;
       }
     }
+
+      .cursor {
+    position:fixed;
+    left:0;top:0;
+    width:80px;height:80px;
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+    will-change:transform,opacity;
+  }
+
+  /* four corner strokes */
+  .corner {
+    position:absolute;
+    width:18px;height:18px;
+    box-sizing:border-box;
+    border:3px solid #fff;
+    background:transparent;
+  }
+  .tl{left:0;top:0;border-right:0;border-bottom:0;border-radius:4px;}
+  .tr{right:0;top:0;border-left:0;border-bottom:0;border-radius:4px;}
+  .bl{left:0;bottom:0;border-right:0;border-top:0;border-radius:4px;}
+  .br{right:0;bottom:0;border-left:0;border-top:0;border-radius:4px;}
+
+  /* center small dot */
+  .center {
+    position:absolute;
+    left:50%;top:50%;
+    width:8px;height:8px;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    background:#fff;
+    box-shadow:0 0 8px rgba(255,255,255,0.4);
+  }
+
+  /* two small floating dots */
+  .dot {
+    position:absolute;
+    width:6px;height:6px;
+    border-radius:50%;
+    background:#bbb;
+    opacity:0.9;
+    box-shadow:0 0 6px rgba(255,255,255,0.15);
+  }
+  .dot1{left:88%;top:10%;}
+  .dot2{left:10%;top:85%;}
+
+  /* scale on active (example on click) */
+  .cursor.active { transform: translate(-50%,-50%) scale(0.9); opacity:0.95; }
+
+  @media (max-width:600px){
+    .cursor{width:56px;height:56px;}
+    .corner{width:12px;height:12px;border-width:2px;}
+    .center{width:6px;height:6px;}
+    .dot{width:5px;height:5px;}
+  }
   </style>
 
 </head>
 
 <body>
     <div class="main">
+
+          <div class="cursor" id="myCursor" aria-hidden="true">
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+    <div class="center"></div>
+    <div class="dot dot1"></div>
+    <div class="dot dot2"></div>
+  </div>
 
         <div class="mobile-name-banner" id="black">
             <h1>Arvind Kumar Yadav</h1>
@@ -597,7 +662,7 @@
             });
 
 
-            let scene = new THREE.Scene();
+            //let scene = new THREE.Scene();
             let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             let renderer = new THREE.WebGLRenderer({ alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
@@ -632,31 +697,33 @@
 
             camera.position.z = 5;
 
-            function animate() {
-                requestAnimationFrame(animate);
+            // yellow ripllle hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee 
 
-                // Smooth cursor movement (to remove lag)
-                mouse.x += (targetMouse.x - mouse.x) * 0.9;
-                mouse.y += (targetMouse.y - mouse.y) * 0.9;
+            // function animate() {
+            //     requestAnimationFrame(animate);
 
-                ripple.forEach((ring, index) => {
-                    ring.position.x = mouse.x * 2;
-                    ring.position.y = mouse.y * 2;
+            //     // Smooth cursor movement (to remove lag)
+            //     mouse.x += (targetMouse.x - mouse.x) * 0.9;
+            //     mouse.y += (targetMouse.y - mouse.y) * 0.9;
 
-                    let scaleFactor = 0.8 + Math.sin(Date.now() * 0.002 + index) * 0.3;
-                    ring.scale.set(scaleFactor, scaleFactor, 1);
-                    ring.material.opacity = 0.6 + Math.sin(Date.now() * 0.002 + index) * 0.3;
-                });
+            //     ripple.forEach((ring, index) => {
+            //         ring.position.x = mouse.x * 2;
+            //         ring.position.y = mouse.y * 2;
 
-                renderer.render(scene, camera);
-            }
-            animate();
+            //         let scaleFactor = 0.8 + Math.sin(Date.now() * 0.002 + index) * 0.3;
+            //         ring.scale.set(scaleFactor, scaleFactor, 1);
+            //         ring.material.opacity = 0.6 + Math.sin(Date.now() * 0.002 + index) * 0.3;
+            //     });
 
-            window.addEventListener("resize", () => {
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-            });
+            //     renderer.render(scene, camera);
+            // }
+            // animate();
+
+            // window.addEventListener("resize", () => {
+            //     renderer.setSize(window.innerWidth, window.innerHeight);
+            //     camera.aspect = window.innerWidth / window.innerHeight;
+            //     camera.updateProjectionMatrix();
+            // });
 
 
 
@@ -664,7 +731,7 @@
         </script>
 
    <script>
-    // Mousemove Ripple Effect
+    // Mousemove Ripple Effect=================================================================
     document.addEventListener('mousemove', function(e) {
       const ripple = document.createElement('div');
       ripple.className = 'ripple';
@@ -699,6 +766,47 @@
         bubble.remove();
       });
     });
+
+
+
+    // squre ripple start hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee 
+
+
+     const cursor = document.getElementById('myCursor');
+
+  let mouseX = window.innerWidth/2, mouseY = window.innerHeight/2;
+  let curX = mouseX, curY = mouseY;
+  const ease = 0.18; // lower = more trailing, higher = snappier
+
+  window.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  // optional: show/hide when leaving window
+  window.addEventListener('mouseleave', ()=> cursor.style.opacity = 0);
+  window.addEventListener('mouseenter', ()=> cursor.style.opacity = 1);
+
+  // click effect (small scale)
+  window.addEventListener('mousedown', ()=> cursor.classList.add('active'));
+  window.addEventListener('mouseup', ()=> cursor.classList.remove('active'));
+
+  function rafLoop(){
+    curX += (mouseX - curX) * ease;
+    curY += (mouseY - curY) * ease;
+    cursor.style.transform = `translate(${curX}px, ${curY}px) translate(-50%,-50%)`;
+    requestAnimationFrame(rafLoop);
+  }
+  requestAnimationFrame(rafLoop);
+
+  // OPTIONAL: change appearance over interactive elements
+  const interactive = ['a','button','input','textarea','select','label'];
+  interactive.forEach(sel => {
+    document.querySelectorAll(sel).forEach(el=>{
+      el.addEventListener('mouseenter', ()=> cursor.style.opacity = 0.6);
+      el.addEventListener('mouseleave', ()=> cursor.style.opacity = 1);
+    });
+  });
   </script>
 </body>
 
