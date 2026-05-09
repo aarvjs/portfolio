@@ -10,120 +10,190 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
+        /* Common Ripple Style */
+        .ripple {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 3px solid rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow:
+                0 0 40px rgba(255, 255, 255, 0.6),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
+        }
 
-   /* Common Ripple Style */
-    .ripple {
-      position: absolute;
-      width: 80px;
-      height: 80px;
-      border: 3px solid rgba(255, 255, 255, 0.9);
-      border-radius: 50%;
-      pointer-events: none;
-      opacity: 0;
-      transform: scale(0);
-      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      box-shadow: 
-        0 0 40px rgba(255, 255, 255, 0.6),
-        inset 0 0 20px rgba(255, 255, 255, 0.2);
-    }
+        /* Light mode: soft gray ripple */
+        body.light-mode .ripple {
+            border-color: rgba(50, 50, 50, 0.55);
+            box-shadow:
+                0 0 30px rgba(50, 50, 50, 0.25),
+                inset 0 0 15px rgba(50, 50, 50, 0.1);
+        }
 
-    /* Click Bubble Ripple */
-    .bubble {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 3px solid rgba(0, 200, 255, 0.9);
-      pointer-events: none;
-      transform: scale(0);
-      opacity: 0.8;
-      animation: bubble-animation 0.8s ease-out forwards;
-      box-shadow:
-        0 0 60px rgba(0, 200, 255, 0.9),
-        inset 0 0 30px rgba(0, 200, 255, 0.4);
-    }
+        /* Click Bubble Ripple */
+        .bubble {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid rgba(0, 200, 255, 0.9);
+            pointer-events: none;
+            transform: scale(0);
+            opacity: 0.8;
+            animation: bubble-animation 0.8s ease-out forwards;
+            box-shadow:
+                0 0 60px rgba(0, 200, 255, 0.9),
+                inset 0 0 30px rgba(0, 200, 255, 0.4);
+        }
 
-    @keyframes bubble-animation {
-      0% {
-        transform: scale(0);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(3);
-        opacity: 0;
-      }
-    }
+        @keyframes bubble-animation {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
 
-      .cursor {
-    position:fixed;
-    left:0;top:0;
-    width:80px;height:80px;
-    pointer-events:none;
-    transform:translate(-50%,-50%);
-    will-change:transform,opacity;
-  }
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
 
-  /* four corner strokes */
-  .corner {
-    position:absolute;
-    width:18px;height:18px;
-    box-sizing:border-box;
-    border:3px solid #fff;
-    background:transparent;
-  }
-  .tl{left:0;top:0;border-right:0;border-bottom:0;border-radius:4px;}
-  .tr{right:0;top:0;border-left:0;border-bottom:0;border-radius:4px;}
-  .bl{left:0;bottom:0;border-right:0;border-top:0;border-radius:4px;}
-  .br{right:0;bottom:0;border-left:0;border-top:0;border-radius:4px;}
 
-  /* center small dot */
-  .center {
-    position:absolute;
-    left:50%;top:50%;
-    width:8px;height:8px;
-    transform:translate(-50%,-50%);
-    border-radius:50%;
-    background:#fff;
-    box-shadow:0 0 8px rgba(255,255,255,0.4);
-  }
+        .cursor {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 80px;
+            height: 80px;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            will-change: transform, opacity;
+        }
 
-  /* two small floating dots */
-  .dot {
-    position:absolute;
-    width:6px;height:6px;
-    border-radius:50%;
-    background:#bbb;
-    opacity:0.9;
-    box-shadow:0 0 6px rgba(255,255,255,0.15);
-  }
-  .dot1{left:88%;top:10%;}
-  .dot2{left:10%;top:85%;}
+        /* four corner strokes */
+        .corner {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            box-sizing: border-box;
+            border: 3px solid #fff;
+            background: transparent;
+        }
 
-  /* scale on active (example on click) */
-  .cursor.active { transform: translate(-50%,-50%) scale(0.9); opacity:0.95; }
+        .tl {
+            left: 0;
+            top: 0;
+            border-right: 0;
+            border-bottom: 0;
+            border-radius: 4px;
+        }
 
-  @media (max-width:600px){
-    .cursor{width:56px;height:56px;}
-    .corner{width:12px;height:12px;border-width:2px;}
-    .center{width:6px;height:6px;}
-    .dot{width:5px;height:5px;}
-  }
-  </style>
+        .tr {
+            right: 0;
+            top: 0;
+            border-left: 0;
+            border-bottom: 0;
+            border-radius: 4px;
+        }
+
+        .bl {
+            left: 0;
+            bottom: 0;
+            border-right: 0;
+            border-top: 0;
+            border-radius: 4px;
+        }
+
+        .br {
+            right: 0;
+            bottom: 0;
+            border-left: 0;
+            border-top: 0;
+            border-radius: 4px;
+        }
+
+        /* center small dot */
+        .center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 8px;
+            height: 8px;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+        }
+
+        /* two small floating dots */
+        .dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #bbb;
+            opacity: 0.9;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.15);
+        }
+
+        .dot1 {
+            left: 88%;
+            top: 10%;
+        }
+
+        .dot2 {
+            left: 10%;
+            top: 85%;
+        }
+
+        /* scale on active (example on click) */
+        .cursor.active {
+            transform: translate(-50%, -50%) scale(0.9);
+            opacity: 0.95;
+        }
+
+        @media (max-width:600px) {
+            .cursor {
+                width: 56px;
+                height: 56px;
+            }
+
+            .corner {
+                width: 12px;
+                height: 12px;
+                border-width: 2px;
+            }
+
+            .center {
+                width: 6px;
+                height: 6px;
+            }
+
+            .dot {
+                width: 5px;
+                height: 5px;
+            }
+        }
+    </style>
 
 </head>
 
 <body>
     <div class="main">
 
-          <div class="cursor" id="myCursor" aria-hidden="true">
-    <div class="corner tl"></div>
-    <div class="corner tr"></div>
-    <div class="corner bl"></div>
-    <div class="corner br"></div>
-    <div class="center"></div>
-    <div class="dot dot1"></div>
-    <div class="dot dot2"></div>
-  </div>
+        <div class="cursor" id="myCursor" aria-hidden="true">
+            <div class="corner tl"></div>
+            <div class="corner tr"></div>
+            <div class="corner bl"></div>
+            <div class="corner br"></div>
+            <div class="center"></div>
+            <div class="dot dot1"></div>
+            <div class="dot dot2"></div>
+        </div>
 
         <div class="mobile-name-banner" id="black">
             <h1>Arvind Kumar Yadav</h1>
@@ -136,16 +206,16 @@
 
         <input type="checkbox" id="check" />
         <div class="ham top-icons">
-            <label for="check"><i class="fa-solid fa-bars"></i></label>
+            <label for="check" style="cursor: pointer;"><i class="fa-solid fa-bars"></i></label>
         </div>
 
         <nav class="nav">
-            <div class="cross top-icons">
+            <div class="cross top-icons" style="cursor: pointer;">
                 <label for="check"><i class="fa-solid fa-xmark"></i></label>
             </div>
             <div class="logo">
 
-                <img src="images/Gemini_Generated_Image_8r3c5z8r3c5z8r3c.png" alt="">
+                <img src="images/arv.png" alt="Arvind Yadav">
             </div>
             <div class="line"></div>
             <ul>
@@ -153,9 +223,8 @@
                 <li><a href="#about"><i class="fa-solid fa-user nav-icons"></i>About</a></li>
                 <li><a href="#projects"><i class="fa-solid fa-sheet-plastic nav-icons"></i>Projects</a></li>
                 <li><a href="#skills"><i class="fa-solid fa-ranking-star nav-icons"></i>Skills</a></li>
-                <!-- <li><a href="#certificates"><i class="fa-solid fa-certificate nav-icons"></i> Certificates</a></li> -->
+                <li><a href="#certificates"><i class="fa-solid fa-briefcase nav-icons"></i>Services</a></li>
                 <li><a href="#education"><i class="fa-solid fa-user-graduate nav-icons"></i>Education</a></li>
-                <!-- <li><a href="#certificates"><i class="fa-solid fa-graduation-cap nav-icons"></i>Certiicates</a></li> -->
                 <li><a href="#contact"><i class="fa-solid fa-address-card nav-icons"></i>Contact</a></li>
             </ul>
         </nav>
@@ -179,16 +248,63 @@
                         <span class="typing"></span>
                     </div>
 
-                    <a href="https://www.linkedin.com/in/arvind-yadav002/" target="_blank">
+                    <a href="https://www.linkedin.com/in/arvind-yadav002/" target="_blank" title="LinkedIn">
                         <i class="fab fa-linkedin"></i>
                     </a>
-                    <a href="https://github.com/aarvjs" target="_blank">
+                    <a href="https://github.com/aarvjs" target="_blank" title="GitHub">
                         <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@DevExposed" target="_blank" title="YouTube - DevExposed">
+                        <i class="fab fa-youtube"></i>
                     </a>
 
                 </div>
 
+                <!-- Right-side Hero Panel -->
+                <div class="hero-right-panel">
+                    <div class="hero-yt-card">
+                        <div class="hero-yt-header">
+                            <span class="hero-yt-icon"><i class="fa-brands fa-youtube"></i></span>
+                            <div>
+                                <p class="hero-yt-label">Content Creator</p>
+                                <a href="https://www.youtube.com/@DevExposed" target="_blank"
+                                    class="hero-yt-channel">DevExposed</a>
+                            </div>
+                        </div>
+                        <div class="hero-yt-tags">
+                            <span>Coding</span>
+                            <span>System Design</span>
+                            <span>Software Development</span>
+                            <span>AI &amp; Technology</span>
+                            <span>Education</span>
+                        </div>
+                    </div>
+                    <p class="hero-panel-label">Recent Products</p>
+                    <div class="hero-product-card">
+                        <div class="hero-product-icon"><i class="fa-solid fa-robot"></i></div>
+                        <div class="hero-product-info">
+                            <h4>AI Agent Lead Generation</h4>
+                            <p>Automated AI lead generation &amp; cold outreach automation system.</p>
+                        </div>
+                    </div>
+                    <div class="hero-product-card">
+                        <div class="hero-product-icon"><i class="fa-solid fa-dumbbell"></i></div>
+                        <div class="hero-product-info">
+                            <h4>Fitlix</h4>
+                            <p>Production-level Flutter fitness &amp; gym management application.</p>
+                        </div>
+                    </div>
+                    <div class="hero-product-card">
+                        <div class="hero-product-icon"><i class="fa-solid fa-handshake"></i></div>
+                        <div class="hero-product-info">
+                            <h4>Freelance Project Delivery</h4>
+                            <p>Delivered real freelance projects with professional client-focused development.</p>
+                        </div>
+                    </div>
+                </div>
+
             </section>
+
             <!--abouot section start here------------------->
 
             <section class="about" id="about">
@@ -274,7 +390,7 @@
                     <div class="project-card">
                         <img src="images/BC.png" alt="">
                         <h3>Supply Chain (Agri) — Blockchain</h3>
-                           <p>Blockchain system to track farm produce with smart contracts and QR code verification.</p>
+                        <p>Blockchain system to track farm produce with smart contracts and QR code verification.</p>
 
                     </div>
 
@@ -362,180 +478,359 @@
                 </div>
                 <div class="skills-group">
                     <h2>Programming Languages</h2>
-                    <marquee class="marquee" behavior="alternate" direction="left">
-                        <div class="skills-group-items">
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/c.png" alt="" class="skill-icons">
-                                <h3>C</h3>
-                            </div>
-                            <div class="skills-group-items-item">
-                                <img src="images/solidity.png" alt="" class="skill-icons">
-                                <h3>Solidity</h3>
-                            </div>
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/javascript.png" alt="" class="skill-icons">
-                                <h3>JavaScript</h3>
-                            </div>
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/php.png" alt="" class="skill-icons">
-                                <h3>PHP</h3>
-                            </div>
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/python.png" alt="" class="skill-icons">
-                                <h3>Python</h3>
-                            </div>
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/java.png" alt="" class="skill-icons">
-                                <h3>Java</h3>
-                            </div>
 
+                    <div class="skills-group-items">
+                        <div class="skills-group-items-item">
+                            <img src="images/logo/c.png" alt="" class="skill-icons">
+                            <h3>C</h3>
                         </div>
-                    </marquee>
+                        <div class="skills-group-items-item">
+                            <img src="images/solidity.png" alt="" class="skill-icons">
+                            <h3>Solidity</h3>
+                        </div>
+                        <div class="skills-group-items-item">
+                            <img src="images/logo/javascript.png" alt="" class="skill-icons">
+                            <h3>JavaScript</h3>
+                        </div>
+
+                        <div class="skills-group-items-item">
+                            <img src="images/logo/python.png" alt="" class="skill-icons">
+                            <h3>Python</h3>
+                        </div>
+                        <div class="skills-group-items-item">
+                            <img src="images/logo/java.png" alt="" class="skill-icons">
+                            <h3>Java</h3>
+                        </div>
+
+                    </div>
+
                 </div>
 
 
                 <div class="skills-group">
-    <h2>Blockchain Tools</h2>
-    <marquee class="marquee" behavior="alternate" direction="left">
-        <div class="skills-group-items">
-            
-            <div class="skills-group-items-item">
-                <img src="images/trufle-removebg-preview.png" alt="Truffle" class="skill-icons">
-                <h3>Truffle</h3>
-            </div>
+                    <h2>Blockchain Tools</h2>
 
-            <div class="skills-group-items-item">
-                <img src="images/MetaMask_Fox.svg.png" alt="MetaMask" class="skill-icons">
-                <h3>MetaMask</h3>
-            </div>
+                    <div class="skills-group-items">
 
-            <div class="skills-group-items-item">
-                <img src="images/ganache-logo-png_seeklogo-426724-removebg-preview.png" alt="Ganache" class="skill-icons">
-                <h3>Ganache</h3>
-            </div>
+                        <div class="skills-group-items-item">
+                            <img src="images/trufle-removebg-preview.png" alt="Truffle" class="skill-icons">
+                            <h3>Truffle</h3>
+                        </div>
 
-            <div class="skills-group-items-item">
-                <img src="images/web3.png" alt="Web3.js" class="skill-icons">
-                <h3>Web3.js</h3>
-            </div>
+                        <div class="skills-group-items-item">
+                            <img src="images/MetaMask_Fox.svg.png" alt="MetaMask" class="skill-icons">
+                            <h3>MetaMask</h3>
+                        </div>
 
-            <div class="skills-group-items-item">
-                <img src="images/hardhat-removebg-preview.png" alt="Hardhat" class="skill-icons">
-                <h3>Hardhat</h3>
-            </div>
+                        <div class="skills-group-items-item">
+                            <img src="images/ganache-logo-png_seeklogo-426724-removebg-preview.png" alt="Ganache"
+                                class="skill-icons">
+                            <h3>Ganache</h3>
+                        </div>
 
-            <div class="skills-group-items-item">
-                <img src="images/indura.png" alt="Infura" class="skill-icons">
-                <h3>Infura</h3>
-            </div>
+                        <div class="skills-group-items-item">
+                            <img src="images/web3.png" alt="Web3.js" class="skill-icons">
+                            <h3>Web3.js</h3>
+                        </div>
 
-            <div class="skills-group-items-item">
-                <img src="images/ipfs-removebg-preview.png" alt="IPFS" class="skill-icons">
-                <h3>IPFS</h3>
-            </div>
+                        <div class="skills-group-items-item">
+                            <img src="images/hardhat-removebg-preview.png" alt="Hardhat" class="skill-icons">
+                            <h3>Hardhat</h3>
+                        </div>
 
-            <div class="skills-group-items-item">
-                <img src="images/pinata.png" alt="Pinata" class="skill-icons">
-                <h3>Pinata</h3>
-            </div>
+                        <div class="skills-group-items-item">
+                            <img src="images/indura.png" alt="Infura" class="skill-icons">
+                            <h3>Infura</h3>
+                        </div>
 
-        </div>
-    </marquee>
-</div>
+                        <div class="skills-group-items-item">
+                            <img src="images/ipfs-removebg-preview.png" alt="IPFS" class="skill-icons">
+                            <h3>IPFS</h3>
+                        </div>
+
+                        <div class="skills-group-items-item">
+                            <img src="images/pinata.png" alt="Pinata" class="skill-icons">
+                            <h3>Pinata</h3>
+                        </div>
+
+                    </div>
+
+                </div>
 
                 <div class="skills-group">
                     <h2>Frameworks & Libraries</h2>
-                    <marquee class="marquee" behavior="alternate" direction="right">
-                        <div class="skills-group-items">
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/reactjs.png" alt="" class="skill-icons">
-                                <h3>React JS</h3>
-                            </div>
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/nodejs.png" alt="" class="skill-icons">
-                                <h3>Node JS</h3>
-                            </div>
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/tal.png" alt="" class="skill-icons">
-                                <h3>Talwind CSS</h3>
-                            </div>
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/django.png" alt="" class="skill-icons">
-                                <h3>Django </h3>
-                            </div>
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/tkin.png" alt="" class="skill-icons">
-                                <h3>Python Tkinter </h3>
-                            </div>
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/bootstrap.png" alt="" class="skill-icons">
-                                <h3>BootStrap </h3>
-                            </div>
+
+                    <div class="skills-group-items">
+                        <div class="skills-group-items-item">
+                            <img src="images/logo/reactjs.png" alt="" class="skill-icons">
+                            <h3>React JS</h3>
                         </div>
-                    </marquee>
+                        <div class="skills-group-items-item">
+                            <img src="images/logo/nodejs.png" alt="" class="skill-icons">
+                            <h3>Node JS</h3>
+                        </div>
+                        <div class="skills-group-items-item">
+                            <img src="images/logo/tal.png" alt="" class="skill-icons">
+                            <h3>Talwind CSS</h3>
+                        </div>
+                        <div class="skills-group-items-item">
+                            <img src="images/next.webp" alt="" class="skill-icons">
+                            <h3>Next.js </h3>
+                        </div>
+                        <div class="skills-group-items-item">
+                            <img src="images/logo/tkin.png" alt="" class="skill-icons">
+                            <h3>Python Tkinter </h3>
+                        </div>
+                        <div class="skills-group-items-item">
+                            <img src="images/logo/bootstrap.png" alt="" class="skill-icons">
+                            <h3>BootStrap </h3>
+                        </div>
+                    </div>
+
                 </div>
+
+                <div class="skills-group">
+                    <h2>DevOps</h2>
+
+                    <div class="skills-group-items">
+
+                        <div class="skills-group-items-item">
+                            <img src="images/logo/git.png" alt="" class="skill-icons">
+                            <h3>Git</h3>
+                        </div>
+
+                        <div class="skills-group-items-item">
+                            <img src="images/logo/Github.gif" alt="" class="skill-icons">
+                            <h3>GitHub</h3>
+                        </div>
+
+                        <div class="skills-group-items-item">
+                            <img src="images/docker.png" alt="" class="skill-icons">
+                            <h3>Docker</h3>
+                        </div>
+
+                        <div class="skills-group-items-item">
+                            <img src="images/kuber.png" alt="" class="skill-icons">
+                            <h3>Kubernetes</h3>
+                        </div>
+
+                        <div class="skills-group-items-item">
+                            <img src="images/logo/aws.png" alt="" class="skill-icons">
+                            <h3>AWS</h3>
+                        </div>
+
+                        <div class="skills-group-items-item">
+                            <img src="images/jenkins.png" alt="" class="skill-icons">
+                            <h3>Jenkins</h3>
+                        </div>
+
+
+
+                        <div class="skills-group-items-item">
+                            <img src="images/teraform.webp" alt="" class="skill-icons">
+                            <h3>Terraform</h3>
+                        </div>
+
+                        <div class="skills-group-items-item">
+                            <img src="images/ansible.png" alt="" class="skill-icons">
+                            <h3>Ansible</h3>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
                 <div class="skills-group">
                     <h2>Others</h2>
-                    <marquee class="marquee" behavior="scroll" direction="left">
 
-                        <div class="skills-group-items">
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/html5.png" alt="" class="skill-icons">
-                                <h3>HTML</h3>
-                            </div>
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/css3.png" alt="" class="skill-icons">
-                                <h3>CSS</h3>
-                            </div>
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/mysql.png" alt="" class="skill-icons">
-                                <h3>MySQL</h3>
-                            </div>
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/git.png" alt="" class="skill-icons">
-                                <h3>Git</h3>
-                            </div>
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/Github.gif" alt="" class="skill-icons">
-                                <h3>Github</h3>
-                            </div>
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/aws.png" alt="" class="skill-icons">
-                                <h3>AWS</h3>
-                            </div>
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/wordPress-removebg-preview.png" alt="" class="skill-icons">
-                                <h3>Wordpress</h3>
-                            </div>
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/DSA.png" alt="" class="skill-icons">
-                                <h3>DSA</h3>
-                            </div>
-                            <div class="skills-group-items-item">
-                                <img src="images/logo/oops.jpg" alt="" class="skill-icons">
-                                <h3>OOPS</h3>
-                            </div>
 
+                    <div class="skills-group-items">
+                        <div class="skills-group-items-item">
+                            <img src="images/logo/html5.png" alt="" class="skill-icons">
+                            <h3>HTML</h3>
                         </div>
-                    </marquee>
+                        <div class="skills-group-items-item">
+                            <img src="images/logo/css3.png" alt="" class="skill-icons">
+                            <h3>CSS</h3>
+                        </div>
+                        <div class="skills-group-items-item">
+                            <img src="images/logo/mysql.png" alt="" class="skill-icons">
+                            <h3>MySQL</h3>
+                        </div>
+                        <div class="skills-group-items-item">
+                            <img src="images/supabase.png" alt="" class="skill-icons">
+                            <h3>Supabase</h3>
+                        </div>
+                        <div class="skills-group-items-item">
+                            <img src="images/firabzse.png" alt="" class="skill-icons">
+                            <h3>Firebase</h3>
+                        </div>
+
+                        <div class="skills-group-items-item">
+                            <img src="images/logo/wordPress-removebg-preview.png" alt="" class="skill-icons">
+                            <h3>Wordpress</h3>
+                        </div>
+                        <div class="skills-group-items-item">
+                            <img src="images/logo/DSA.png" alt="" class="skill-icons">
+                            <h3>DSA</h3>
+                        </div>
+                        <div class="skills-group-items-item">
+                            <img src="images/logo/oops.jpg" alt="" class="skill-icons">
+                            <h3>OOPS</h3>
+                        </div>
+
+                    </div>
+
                 </div>
 
             </section>
 
             <!--skill section end here-->
 
-            <!-- certificates section start hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee -->
+            <!-- services section start -->
 
-
-            <!-- <section class="education" id="certificates">
+            <section class="education" id="certificates">
                 <div class="section-banner">
-                    <h2>Certificates</h2>
+                    <h2>Services</h2>
                 </div>
+                <section class="service-detail-section" id="services">
 
+                    <!-- Freelancer intro -->
+                    <div class="services-intro">
+                        <p>I am <strong>Arvind Yadav</strong>, a passionate <strong>Freelancer</strong> and
+                            <strong>Founder of A Cube Technology</strong>. I have successfully delivered multiple
+                            real-world projects across web, mobile, AI, and automation domains. My goal is to craft
+                            premium digital solutions that drive real business value.
+                        </p>
+                    </div>
 
+                    <div class="services-grid">
 
+                        <!-- 1. Full Stack Web Development -->
+                        <div class="service-mini-card">
+                            <div class="svc-icon-wrap">
+                                <i class="fa-solid fa-layer-group svc-icon"></i>
+                            </div>
+                            <h3>Full Stack Web Development</h3>
+                            <p>End-to-end web applications built with modern tech stacks — from pixel-perfect UIs to
+                                robust server-side APIs.</p>
+                            <ul>
+                                <li>React.js / Next.js</li>
+                                <li>Node.js / Express</li>
+                                <li>Database Integration</li>
+                            </ul>
+                        </div>
 
-            </section> -->
+                        <!-- 2. Mobile App Development -->
+                        <div class="service-mini-card">
+                            <div class="svc-icon-wrap">
+                                <i class="fa-solid fa-mobile-screen-button svc-icon"></i>
+                            </div>
+                            <h3>Mobile App Development</h3>
+                            <p>Cross-platform & native mobile apps with exceptional UX, delivered for both Android and
+                                iOS platforms.</p>
+                            <ul>
+                                <li>Flutter / React Native</li>
+                                <li>Firebase Backend</li>
+                                <li>Play Store / App Store</li>
+                            </ul>
+                        </div>
+
+                        <!-- 3. AI Agent Development -->
+                        <div class="service-mini-card">
+                            <div class="svc-icon-wrap">
+                                <i class="fa-solid fa-robot svc-icon"></i>
+                            </div>
+                            <h3>AI Agent Development</h3>
+                            <p>Intelligent AI-powered agents and tools that automate tasks, process data, and enhance
+                                productivity.</p>
+                            <ul>
+                                <li>LLM Integration</li>
+                                <li>Custom AI Workflows</li>
+                                <li>Chatbots & Assistants</li>
+                            </ul>
+                        </div>
+
+                        <!-- 4. Automation Solutions -->
+                        <div class="service-mini-card">
+                            <div class="svc-icon-wrap">
+                                <i class="fa-solid fa-gears svc-icon"></i>
+                            </div>
+                            <h3>Automation Solutions</h3>
+                            <p>Smart workflow automation using n8n and other tools to eliminate repetitive tasks and
+                                boost efficiency.</p>
+                            <ul>
+                                <li>n8n Workflows</li>
+                                <li>API Automation</li>
+                                <li>Business Process Automation</li>
+                            </ul>
+                        </div>
+
+                        <!-- 5. UI/UX Responsive Design -->
+                        <div class="service-mini-card">
+                            <div class="svc-icon-wrap">
+                                <i class="fa-solid fa-pen-ruler svc-icon"></i>
+                            </div>
+                            <h3>UI/UX Responsive Design</h3>
+                            <p>Crafting beautiful, intuitive, and fully responsive interfaces that work flawlessly
+                                across all devices.</p>
+                            <ul>
+                                <li>Figma / Prototyping</li>
+                                <li>Mobile-First Design</li>
+                                <li>Design Systems</li>
+                            </ul>
+                        </div>
+
+                        <!-- 6. SEO Optimization -->
+                        <div class="service-mini-card">
+                            <div class="svc-icon-wrap">
+                                <i class="fa-solid fa-magnifying-glass-chart svc-icon"></i>
+                            </div>
+                            <h3>SEO Optimization</h3>
+                            <p>Boosting your digital presence through technical SEO, on-page optimization, and
+                                performance improvements.</p>
+                            <ul>
+                                <li>Technical SEO Audit</li>
+                                <li>Page Speed Optimization</li>
+                                <li>Keyword & Meta Strategy</li>
+                            </ul>
+                        </div>
+
+                        <!-- 7. API Integration -->
+                        <div class="service-mini-card">
+                            <div class="svc-icon-wrap">
+                                <i class="fa-solid fa-plug-circle-bolt svc-icon"></i>
+                            </div>
+                            <h3>API Integration</h3>
+                            <p>Connecting your systems with third-party services through secure, scalable, and
+                                well-documented APIs.</p>
+                            <ul>
+                                <li>REST & GraphQL APIs</li>
+                                <li>Payment Gateways</li>
+                                <li>Third-Party Integrations</li>
+                            </ul>
+                        </div>
+
+                        <!-- 8. Freelance Project Development -->
+                        <div class="service-mini-card">
+                            <div class="svc-icon-wrap">
+                                <i class="fa-solid fa-handshake svc-icon"></i>
+                            </div>
+                            <h3>Freelance Project Development</h3>
+                            <p>Custom software solutions for individuals and businesses — from MVP to production-ready
+                                products.</p>
+                            <ul>
+                                <li>Requirement Analysis</li>
+                                <li>Agile Development</li>
+                                <li>Post-Launch Support</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </section>
+            </section>
 
 
 
@@ -594,33 +889,90 @@
 
             <section class="contact" id="contact">
                 <div class="section-banner">
-                    <h2>contact</h2>
+                    <h2>Contact</h2>
                 </div>
 
+                <div class="contact-wrapper">
 
+                    <!-- Left: Profile Info Card -->
+                    <div class="contact-profile-card">
+                        <div class="contact-avatar">
+                            <img src="images/arv.png" alt="Arvind Yadav">
+                        </div>
+                        <h2 class="contact-name">Arvind Yadav</h2>
+                        <p class="contact-role">Founder &amp; CEO</p>
+                        <p class="contact-company"><i class="fa-solid fa-building"></i> A Cube Technology</p>
 
-                <div class="box1">
-                    <div class="box2">
+                        <div class="contact-divider"></div>
 
+                        <!-- Company Website -->
+                        <a href="https://acubetech.vercel.app/" target="_blank" class="contact-company-link"
+                            title="Visit A Cube Technology">
+                            <i class="fa-solid fa-globe"></i>
+                            <span>A Cube Technology Website</span>
+                        </a>
+
+                        <!-- Direct Contact Buttons -->
+                        <div class="contact-direct-btns">
+                            <a href="mailto:arvindyadav70075@gmail.com" class="contact-btn contact-btn-email"
+                                title="Send Email">
+                                <i class="fa-solid fa-envelope"></i>
+                                <span>Email Me</span>
+                            </a>
+                            <a href="https://wa.me/919140130314" target="_blank" class="contact-btn contact-btn-wa"
+                                title="WhatsApp">
+                                <i class="fa-brands fa-whatsapp"></i>
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
+
+                        <!-- Social Links -->
+                        <div class="contact-socials">
+                            <a href="https://www.linkedin.com/in/arvind-yadav002/" target="_blank"
+                                class="csocial-link csocial-linkedin" title="LinkedIn">
+                                <i class="fa-brands fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://x.com/ArvindYada1550" target="_blank" class="csocial-link csocial-twitter"
+                                title="X / Twitter">
+                                <i class="fa-brands fa-x-twitter"></i>
+                            </a>
+                            <a href="https://github.com/aarvjs" target="_blank" class="csocial-link csocial-github"
+                                title="GitHub">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                            <a href="https://www.youtube.com/@DevExposed" target="_blank"
+                                class="csocial-link csocial-youtube" title="YouTube - DevExposed">
+                                <i class="fa-brands fa-youtube"></i>
+                            </a>
+                        </div>
                     </div>
 
-                    <div class="messg">
-                        <form>
-
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name">
-
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email">
-
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" style="resize: none;"></textarea>
-
-                            <button type="submit">Submit</button>
+                    <!-- Right: Message Form -->
+                    <div class="contact-form-card">
+                        <h3 class="contact-form-title"><i class="fa-solid fa-paper-plane"></i> Send a Message</h3>
+                        <p class="contact-form-sub">Have a project in mind? Let's build something amazing together.</p>
+                        <form class="contact-form" id="contactForm">
+                            <div class="cform-group">
+                                <label for="cname">Your Name</label>
+                                <input type="text" id="cname" name="name" placeholder="John Doe" required>
+                            </div>
+                            <div class="cform-group">
+                                <label for="cemail">Email Address</label>
+                                <input type="email" id="cemail" name="email" placeholder="john@example.com" required>
+                            </div>
+                            <div class="cform-group">
+                                <label for="cmessage">Message</label>
+                                <textarea id="cmessage" name="message" rows="5"
+                                    placeholder="Tell me about your project..." style="resize: vertical;"
+                                    required></textarea>
+                            </div>
+                            <button type="submit" class="contact-submit-btn">
+                                <i class="fa-solid fa-paper-plane"></i> Send Message
+                            </button>
                         </form>
                     </div>
-                </div>
 
+                </div>
             </section>
             <!--Contact section end here-->
 
@@ -630,14 +982,12 @@
                         class="sm sm-icon fa-brands fa-linkedin"></i></a>
                 <a href="https://github.com/aarvjs" target="_blank"><i
                         class="sm-icon fa-brands fa-square-github"></i></a>
-                <a href="https://x.com/ArvindYada_002?t=MdLSDkIi1VT9qMZjqQ6z0w&s=08 " target="_blank"><i
+                <a href="https://x.com/ArvindYada1550" target="_blank"><i
                         class="sm-icon fa-brands fa-square-x-twitter"></i></a>
                 <a href="https://wa.me/+919140130314" target="_blank"><i
                         class="sm-icon fa-brands fa-square-whatsapp"></i></a>
                 <a href="https://www.instagram.com/aarv__002/" target="_blank"><i
                         class="sm-icon fa-brands fa-square-instagram"></i></a>
-                <a href="https://www.facebook.com/profile.php?id=100024856070016" target="_blank"><i
-                        class="sm-icon fa-brands fa-square-facebook"></i></a>
             </div>
         </div>
         <script src="bacgroud.js"></script>
@@ -648,166 +998,101 @@
         <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
         <script src="script.js"></script>
         <script>
-            document.querySelectorAll('.marquee').forEach(function (marquee) {
-                marquee.addEventListener('mouseover', function () {
-                    this.stop();
-                });
-
-                marquee.addEventListener('mouseout', function () {
-                    const currentDirection = this.getAttribute('direction');
-                    const newDirection = currentDirection === 'left' ? 'right' : 'left';
-                    this.setAttribute('direction', newDirection);
-                    this.start();
-                });
-            });
-
-
-            //let scene = new THREE.Scene();
-            let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            let renderer = new THREE.WebGLRenderer({ alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            document.body.appendChild(renderer.domElement);
-
-            let mouse = new THREE.Vector2();
-            let targetMouse = new THREE.Vector2(); // Smooth motion ke liye
-
-            document.addEventListener("mousemove", (event) => {
-                targetMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-                targetMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-            });
-
-            function createRipple() {
-                let rings = [];
-                for (let i = 0; i < 5; i++) {
-                    let geometry = new THREE.RingGeometry(0.05 + i * 0.03, 0.07 + i * 0.03, 32); // Size bada kiya
-                    let material = new THREE.MeshBasicMaterial({
-                        color: 0xffa500,
-                        side: THREE.DoubleSide,
-                        transparent: true,
-                        opacity: 0.7 - i * 0.15
-                    });
-                    let ring = new THREE.Mesh(geometry, material);
-                    rings.push(ring);
-                    scene.add(ring);
-                }
-                return rings;
+            // Three.js renderer is initialized but kept hidden to prevent
+            // it from appending a full-viewport canvas to <body> that causes
+            // white space / overflow below .main
+            try {
+                let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                let renderer = new THREE.WebGLRenderer({ alpha: true });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                // Suppress layout impact — hide the canvas completely
+                renderer.domElement.style.display = 'none';
+                renderer.domElement.style.position = 'fixed';
+                renderer.domElement.style.pointerEvents = 'none';
+                document.body.appendChild(renderer.domElement);
+            } catch (e) {
+                // Three.js init failed silently
             }
-
-            let ripple = createRipple();
-
-            camera.position.z = 5;
-
-            // yellow ripllle hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee 
-
-            // function animate() {
-            //     requestAnimationFrame(animate);
-
-            //     // Smooth cursor movement (to remove lag)
-            //     mouse.x += (targetMouse.x - mouse.x) * 0.9;
-            //     mouse.y += (targetMouse.y - mouse.y) * 0.9;
-
-            //     ripple.forEach((ring, index) => {
-            //         ring.position.x = mouse.x * 2;
-            //         ring.position.y = mouse.y * 2;
-
-            //         let scaleFactor = 0.8 + Math.sin(Date.now() * 0.002 + index) * 0.3;
-            //         ring.scale.set(scaleFactor, scaleFactor, 1);
-            //         ring.material.opacity = 0.6 + Math.sin(Date.now() * 0.002 + index) * 0.3;
-            //     });
-
-            //     renderer.render(scene, camera);
-            // }
-            // animate();
-
-            // window.addEventListener("resize", () => {
-            //     renderer.setSize(window.innerWidth, window.innerHeight);
-            //     camera.aspect = window.innerWidth / window.innerHeight;
-            //     camera.updateProjectionMatrix();
-            // });
-
-
-
-
         </script>
 
-   <script>
-    // Mousemove Ripple Effect=================================================================
-    document.addEventListener('mousemove', function(e) {
-      const ripple = document.createElement('div');
-      ripple.className = 'ripple';
-      ripple.style.left = e.clientX - 40 + 'px';
-      ripple.style.top = e.clientY - 40 + 'px';
-      document.body.appendChild(ripple);
+        <script>
+            // Mousemove Ripple Effect=================================================================
+            document.addEventListener('mousemove', function (e) {
+                const ripple = document.createElement('div');
+                ripple.className = 'ripple';
+                ripple.style.left = e.clientX - 40 + 'px';
+                ripple.style.top = e.clientY - 40 + 'px';
+                document.body.appendChild(ripple);
 
-      setTimeout(() => {
-        ripple.style.opacity = '1';
-        ripple.style.transform = 'scale(1)';
-      }, 10);
+                setTimeout(() => {
+                    ripple.style.opacity = '1';
+                    ripple.style.transform = 'scale(1)';
+                }, 10);
 
-      setTimeout(() => {
-        ripple.style.opacity = '0';
-        ripple.style.transform = 'scale(2)';
-      }, 300);
+                setTimeout(() => {
+                    ripple.style.opacity = '0';
+                    ripple.style.transform = 'scale(2)';
+                }, 300);
 
-      setTimeout(() => {
-        ripple.remove();
-      }, 600);
-    });
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
 
-    // Click Bubble Effect
-    document.addEventListener('click', function(e) {
-      const bubble = document.createElement('div');
-      bubble.className = 'bubble';
-      bubble.style.left = `${e.clientX - 60}px`;
-      bubble.style.top = `${e.clientY - 60}px`;
-      document.body.appendChild(bubble);
+            // Click Bubble Effect
+            document.addEventListener('click', function (e) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                bubble.style.left = `${e.clientX - 60}px`;
+                bubble.style.top = `${e.clientY - 60}px`;
+                document.body.appendChild(bubble);
 
-      bubble.addEventListener('animationend', () => {
-        bubble.remove();
-      });
-    });
-
-
-
-    // squre ripple start hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee 
+                bubble.addEventListener('animationend', () => {
+                    bubble.remove();
+                });
+            });
 
 
-     const cursor = document.getElementById('myCursor');
 
-  let mouseX = window.innerWidth/2, mouseY = window.innerHeight/2;
-  let curX = mouseX, curY = mouseY;
-  const ease = 0.18; // lower = more trailing, higher = snappier
+            // squre ripple start hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee 
 
-  window.addEventListener('mousemove', e => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
 
-  // optional: show/hide when leaving window
-  window.addEventListener('mouseleave', ()=> cursor.style.opacity = 0);
-  window.addEventListener('mouseenter', ()=> cursor.style.opacity = 1);
+            const cursor = document.getElementById('myCursor');
 
-  // click effect (small scale)
-  window.addEventListener('mousedown', ()=> cursor.classList.add('active'));
-  window.addEventListener('mouseup', ()=> cursor.classList.remove('active'));
+            let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+            let curX = mouseX, curY = mouseY;
+            const ease = 0.18; // lower = more trailing, higher = snappier
 
-  function rafLoop(){
-    curX += (mouseX - curX) * ease;
-    curY += (mouseY - curY) * ease;
-    cursor.style.transform = `translate(${curX}px, ${curY}px) translate(-50%,-50%)`;
-    requestAnimationFrame(rafLoop);
-  }
-  requestAnimationFrame(rafLoop);
+            window.addEventListener('mousemove', e => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
 
-  // OPTIONAL: change appearance over interactive elements
-  const interactive = ['a','button','input','textarea','select','label'];
-  interactive.forEach(sel => {
-    document.querySelectorAll(sel).forEach(el=>{
-      el.addEventListener('mouseenter', ()=> cursor.style.opacity = 0.6);
-      el.addEventListener('mouseleave', ()=> cursor.style.opacity = 1);
-    });
-  });
-  </script>
+            // optional: show/hide when leaving window
+            window.addEventListener('mouseleave', () => cursor.style.opacity = 0);
+            window.addEventListener('mouseenter', () => cursor.style.opacity = 1);
+
+            // click effect (small scale)
+            window.addEventListener('mousedown', () => cursor.classList.add('active'));
+            window.addEventListener('mouseup', () => cursor.classList.remove('active'));
+
+            function rafLoop() {
+                curX += (mouseX - curX) * ease;
+                curY += (mouseY - curY) * ease;
+                cursor.style.transform = `translate(${curX}px, ${curY}px) translate(-50%,-50%)`;
+                requestAnimationFrame(rafLoop);
+            }
+            requestAnimationFrame(rafLoop);
+
+            // OPTIONAL: change appearance over interactive elements
+            const interactive = ['a', 'button', 'input', 'textarea', 'select', 'label'];
+            interactive.forEach(sel => {
+                document.querySelectorAll(sel).forEach(el => {
+                    el.addEventListener('mouseenter', () => cursor.style.opacity = 0.6);
+                    el.addEventListener('mouseleave', () => cursor.style.opacity = 1);
+                });
+            });
+        </script>
 </body>
 
 </html>
