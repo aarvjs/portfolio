@@ -1,0 +1,207 @@
+{
+  "name": "Arvind Kumar Yadav",
+  "role": "Web Developer, Freelancer, Founder & CEO at A Cube Technology",
+  "about": "A highly motivated BCA graduate with hands-on experience in web and app development. Looking for a challenging role to apply my technical skills, freelancing experience, and growing knowledge of blockchain in building innovative digital solutions.",
+  "skills": [
+    "C", "Solidity", "JavaScript", "Python", "Java", "Truffle", "MetaMask", "Ganache", "Web3.js", "Hardhat", "Infura", "IPFS", "Pinata", "React JS", "Node JS", "Tailwind CSS", "Next.js", "Python Tkinter", "Bootstrap", "Git", "GitHub", "Docker", "Kubernetes", "AWS", "Jenkins", "Terraform", "Ansible", "HTML", "CSS", "MySQL", "Supabase", "Firebase", "Wordpress", "DSA", "OOPS"
+  ],
+  "services": [
+    {
+      "name": "Full Stack Web Development",
+      "description": "End-to-end web applications built with modern tech stacks — from pixel-perfect UIs to robust server-side APIs.",
+      "technologies": ["React.js", "Next.js", "Node.js", "Express", "Database Integration"]
+    },
+    {
+      "name": "Mobile App Development",
+      "description": "Cross-platform & native mobile apps with exceptional UX, delivered for both Android and iOS platforms.",
+      "technologies": ["Flutter", "React Native", "Firebase Backend", "Play Store", "App Store"]
+    },
+    {
+      "name": "AI Agent Development",
+      "description": "Intelligent AI-powered agents and tools that automate tasks, process data, and enhance productivity.",
+      "technologies": ["LLM Integration", "Custom AI Workflows", "Chatbots & Assistants"]
+    },
+    {
+      "name": "Automation Solutions",
+      "description": "Smart workflow automation using n8n and other tools to eliminate repetitive tasks and boost efficiency.",
+      "technologies": ["n8n Workflows", "API Automation", "Business Process Automation"]
+    },
+    {
+      "name": "UI/UX Responsive Design",
+      "description": "Crafting beautiful, intuitive, and fully responsive interfaces that work flawlessly across all devices.",
+      "technologies": ["Figma", "Prototyping", "Mobile-First Design", "Design Systems"]
+    },
+    {
+      "name": "SEO Optimization",
+      "description": "Boosting your digital presence through technical SEO, on-page optimization, and performance improvements.",
+      "technologies": ["Technical SEO Audit", "Page Speed Optimization", "Keyword & Meta Strategy"]
+    },
+    {
+      "name": "API Integration",
+      "description": "Connecting your systems with third-party services through secure, scalable, and well-documented APIs.",
+      "technologies": ["REST & GraphQL APIs", "Payment Gateways", "Third-Party Integrations"]
+    },
+    {
+      "name": "Freelance Project Development",
+      "description": "Custom software solutions for individuals and businesses — from MVP to production-ready products.",
+      "technologies": ["Requirement Analysis", "Agile Development", "Post-Launch Support"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Supply Chain (Agri) — Blockchain",
+      "description": "Blockchain system to track farm produce with smart contracts and QR code verification.",
+      "techStack": [],
+      "liveUrl": "",
+      "githubUrl": "",
+      "category": "Blockchain"
+    },
+    {
+      "name": "Tasty Tiffin",
+      "description": "An online tiffin delivery service app providing homemade and healthy meals.",
+      "techStack": [],
+      "liveUrl": "",
+      "githubUrl": "",
+      "category": "Mobile App"
+    },
+    {
+      "name": "AllenInside App",
+      "description": "A mobile app designed for Allen students to connect with local markets and services easily.",
+      "techStack": [],
+      "liveUrl": "",
+      "githubUrl": "",
+      "category": "Mobile App"
+    },
+    {
+      "name": "Research Paper Management System",
+      "description": "A React-based web application built for colleges to manage research papers efficiently.",
+      "techStack": ["React JS"],
+      "liveUrl": "",
+      "githubUrl": "",
+      "category": "Web Application"
+    },
+    {
+      "name": "Online Course Platform",
+      "description": "A freelance web project for online course purchase and management. with admin panel student can see the services that provide by ush.",
+      "techStack": [],
+      "liveUrl": "",
+      "githubUrl": "",
+      "category": "Web Application"
+    },
+    {
+      "name": "AI HR & Education Suite",
+      "description": "Built a comprehensive platform featuring AI-powered ATS Resume Checker, Resume Builder, and smart hiring tools. Designed to simplify HR processes and enhance student career opportunities.",
+      "techStack": ["AI"],
+      "liveUrl": "",
+      "githubUrl": "",
+      "category": "AI / Web Application"
+    },
+    {
+      "name": "Water Conservation Game",
+      "description": "Developed an interactive educational game on water saving that won 1st Prize in an inter-college hackathon with 200+ participants. Focused on awareness through fun and engagement.",
+      "techStack": [],
+      "liveUrl": "",
+      "githubUrl": "",
+      "category": "Game"
+    },
+    {
+      "name": "College ERP Management System",
+      "description": "Created an ERP system for college administration, managing student data, attendance, fees, and academics. A robust solution ensuring efficiency and digital transformation for institutions.",
+      "techStack": [],
+      "liveUrl": "",
+      "githubUrl": "",
+      "category": "Web Application"
+    },
+    {
+      "name": "AI Voice Assistant",
+      "description": "A smart voice-based assistant that listens to commands and performs tasks like opening apps, searching, and giving quick updates.",
+      "techStack": ["AI"],
+      "liveUrl": "",
+      "githubUrl": "",
+      "category": "AI"
+    },
+    {
+      "name": "Smart TODO (IPFS)",
+      "description": "Todo app with image attachments stored on IPFS for decentralized media hosting.",
+      "techStack": ["IPFS"],
+      "liveUrl": "",
+      "githubUrl": "",
+      "category": "Blockchain"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Freelancer",
+      "description": "Delivered multiple real-world projects across web, mobile, AI, and automation domains.",
+      "company": "Self-Employed"
+    },
+    {
+      "title": "Founder & CEO",
+      "company": "A Cube Technology",
+      "description": "Crafting premium digital solutions that drive real business value."
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Computer Application",
+      "institution": "Allenhouse Institute of Technology",
+      "duration": "2023–2026"
+    },
+    {
+      "degree": "12th Grade",
+      "institution": "Paritosh Inter College, Kanpur UP",
+      "duration": "2021–2023"
+    },
+    {
+      "degree": "10th Grade",
+      "institution": "MBSN Siksha Niketan, Kanpur UP",
+      "duration": "2019–2021"
+    }
+  ],
+  "certificates": [],
+  "companyDetails": {
+    "name": "A Cube Technology",
+    "role": "Founder & CEO",
+    "website": "https://acubetech.vercel.app/",
+    "products": [
+      {
+        "name": "AI Agent Lead Generation",
+        "description": "Automated AI lead generation & cold outreach automation system."
+      },
+      {
+        "name": "Fitlix",
+        "description": "Production-level Flutter fitness & gym management application."
+      },
+      {
+        "name": "Freelance Project Delivery",
+        "description": "Delivered real freelance projects with professional client-focused development."
+      }
+    ]
+  },
+  "contactInfo": {
+    "email": "arvindyadav70075@gmail.com",
+    "whatsapp": "+919140130314",
+    "youtubeChannel": "DevExposed"
+  },
+  "socialLinks": {
+    "linkedin": "https://www.linkedin.com/in/arvind-yadav002/",
+    "twitter": "https://x.com/ArvindYada1550",
+    "instagram": "https://www.instagram.com/aarv__002/",
+    "youtube": "https://www.youtube.com/@DevExposed"
+  },
+  "githubLinks": [
+    "https://github.com/aarvjs"
+  ],
+  "liveProjectLinks": [],
+  "achievements": [
+    "1st Prize in an inter-college hackathon with 200+ participants for Water Conservation Game"
+  ],
+  "technologies": {
+    "programmingLanguages": ["C", "Solidity", "JavaScript", "Python", "Java"],
+    "blockchainTools": ["Truffle", "MetaMask", "Ganache", "Web3.js", "Hardhat", "Infura", "IPFS", "Pinata"],
+    "frameworksAndLibraries": ["React JS", "Node JS", "Tailwind CSS", "Next.js", "Python Tkinter", "Bootstrap"],
+    "devops": ["Git", "GitHub", "Docker", "Kubernetes", "AWS", "Jenkins", "Terraform", "Ansible"],
+    "others": ["HTML", "CSS", "MySQL", "Supabase", "Firebase", "Wordpress", "DSA", "OOPS"]
+  },
+  "faqs": []
+}
