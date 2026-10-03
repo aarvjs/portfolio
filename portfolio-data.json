@@ -49,6 +49,22 @@
   ],
   "projects": [
     {
+      "name": "FacultyJobs",
+      "description": "Professional hiring and recruitment platform with candidate portals, AI resume extraction, and REST API integrations.",
+      "techStack": ["React", "Node.js", "REST API"],
+      "liveUrl": "https://facultyjobs.org/",
+      "githubUrl": "",
+      "category": "Web Application"
+    },
+    {
+      "name": "Perfect Pizza — Food Ordering App",
+      "description": "Production food ordering and delivery mobile app for Perfect Pizza with menu browsing and live order tracking.",
+      "techStack": ["Flutter", "Android SDK", "Firebase"],
+      "liveUrl": "https://play.google.com/store/apps/details?id=com.perfectpizza.fooddelivery",
+      "githubUrl": "",
+      "category": "Mobile App"
+    },
+    {
       "name": "Supply Chain (Agri) — Blockchain",
       "description": "Blockchain system to track farm produce with smart contracts and QR code verification.",
       "techStack": [],
@@ -169,8 +185,8 @@
         "description": "Automated AI lead generation & cold outreach automation system."
       },
       {
-        "name": "Fitlix",
-        "description": "Production-level Flutter fitness & gym management application."
+        "name": "Food Ordering App",
+        "description": "Production-level Perfect Pizza food ordering & delivery application."
       },
       {
         "name": "Freelance Project Delivery",

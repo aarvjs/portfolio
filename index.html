@@ -289,13 +289,14 @@
                             <p>Automated AI lead generation &amp; cold outreach automation system.</p>
                         </div>
                     </div>
-                    <div class="hero-product-card">
-                        <div class="hero-product-icon"><i class="fa-solid fa-dumbbell"></i></div>
+                    <a href="https://play.google.com/store/apps/details?id=com.perfectpizza.fooddelivery"
+                        target="_blank" class="hero-product-card" style="text-decoration: none;">
+                        <div class="hero-product-icon"><i class="fa-solid fa-pizza-slice"></i></div>
                         <div class="hero-product-info">
-                            <h4>Fitlix</h4>
-                            <p>Production-level Flutter fitness &amp; gym management application.</p>
+                            <h4>Food Ordering App</h4>
+                            <p>Real-world Perfect Pizza food ordering &amp; delivery app.</p>
                         </div>
-                    </div>
+                    </a>
                     <div class="hero-product-card">
                         <div class="hero-product-icon"><i class="fa-solid fa-handshake"></i></div>
                         <div class="hero-product-info">
@@ -315,7 +316,7 @@
                 </div>
                 <div class="about-content">
                     <div class="left">
-                        <img src="images/Gemini_Generated_Image_8r3c5z8r3c5z8r3c.png" alt="">
+                        <img src="images/WhatsApp Image 2026-09-04 at 14.28.37.jpeg" alt="">
                     </div>
                     <div class="right">
                         <div class="text">
@@ -387,86 +388,8 @@
                 <div class="section-banner">
                     <h2>Projects</h2>
                 </div>
-                <div class="projects-content">
-
-                    <div class="project-card">
-                        <img src="images/BC.png" alt="">
-                        <h3>Supply Chain (Agri) — Blockchain</h3>
-                        <p>Blockchain system to track farm produce with smart contracts and QR code verification.</p>
-
-                    </div>
-
-                    <div class="project-card">
-                        <img src="images/projects/a-minimalist-logo-design-featuring-the-t_3jM5b9hhSECYBaKYQSgclg_eSN7_0shSwGnujSU05taNw.jpeg"
-                            alt="">
-                        <h3>Tasty Tiffin</h3>
-                        <p>An online tiffin delivery service app providing homemade and healthy meals.</p>
-
-                    </div>
-                    <div class="project-card">
-                        <img src="images/a-modern-and-minimalist-logo-design-for-_uIAl5bzdQK6U50qftQPhCg_Im9HVkGASduyrQEPgWhAxQ.jpeg"
-                            alt="">
-                        <h3> AllenInside App</h3>
-                        <p>A mobile app designed for Allen students to connect with local markets and services easily.
-                        </p>
-
-                    </div>
-                    <div class="project-card">
-                        <img src="images/a-modern-logo-design-for-a-react-based-r_j9zrL9hTQGCZFw84G0RJyA_4578Xi-YTTeuvNYdC4NRxQ.jpeg"
-                            alt="">
-                        <h3>Research Paper Management System</h3>
-                        <p>A React-based web application built for colleges to manage research papers efficiently.</p>
-
-                    </div>
-                    <div class="project-card">
-                        <img src="images/a-modern-logo-design-featuring-freelance_mXIHYhLLT8Gl0cNjGafD7Q_-gFOqyCBR_OuLBWwq4DTuw.jpeg"
-                            alt="">
-                        <h3>Online Course Platform</h3>
-                        A freelance web project for online course purchase and management. with admin panel student can
-                        see the services that provide by ush.
-                    </div>
-                    <div class="project-card">
-                        <img src="images/a-vector-logo-design-showcasing-edumentr_N0chBuBQS5eWVI6_gmngXw_nAHXxtgkTPOKr0wOucpyPg.jpeg"
-                            alt="">
-                        <h3> AI HR & Education Suite</h3>
-                        <p>Built a comprehensive platform featuring AI-powered ATS Resume Checker, Resume Builder, and
-                            smart hiring tools. Designed to simplify HR processes and enhance student career
-                            opportunities.</p>
-
-                    </div>
-                    <div class="project-card">
-                        <img src="images/a-digital-illustration-of-a-stylized-wat_oeCKztniQIOWcBkPGI7Z9Q_9_jUGgqSTI2GR7R4t5hmyA.jpeg"
-                            alt="">
-                        <h3>Water Conservation Game</h3>
-                        <p>Developed an interactive educational game on water saving that won 1st Prize in an
-                            inter-college hackathon with 200+ participants. Focused on awareness through fun and
-                            engagement.</p>
-
-                    </div>
-                    <div class="project-card">
-                        <img src="images/3-college-erp-management-system-brand-us_T6nUaS2LS8CMzTc92sCl2w_cq5Lm-8OS5CXJY3rKqk0-w.jpeg"
-                            alt="">
-                        <h3>College ERP Management System</h3>
-                        <p>Created an ERP system for college administration, managing student data, attendance, fees,
-                            and academics. A robust solution ensuring efficiency and digital transformation for
-                            institutions.</p>
-
-                    </div>
-                    <div class="project-card">
-                        <img src="images/jarvis.jpeg" alt="">
-                        <h3>AI Voice Assistant</h3>
-                        <p>
-                            A smart voice-based assistant that listens to commands and performs tasks like opening apps,
-                            searching, and giving quick updates.
-
-                        </p>
-                    </div>
-                    <div class="project-card">
-                        <img src="images/Blockchain.jpeg" alt="">
-                        <h3>Smart TODO (IPFS)</h3>
-                        <p>Todo app with image attachments stored on IPFS for decentralized media hosting.</p>
-                    </div>
-
+                <div class="projects-content" id="projectsContainer">
+                    <!-- Dynamic project cards will be rendered here by script.js -->
                 </div>
             </section>
 
@@ -1095,6 +1018,65 @@
                 });
             });
         </script>
+
+        <!-- Project Details Modal -->
+        <div class="project-modal" id="projectModal" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
+            <div class="modal-backdrop"></div>
+            <div class="modal-container">
+                <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="modal-content-wrapper">
+                    <div class="modal-header">
+                        <span class="modal-project-type" id="modalProjectType"></span>
+                        <h2 class="modal-title" id="modalTitle"></h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-section description-sec">
+                            <h4 class="modal-section-title"><i class="fa-solid fa-circle-info"></i> Project Overview
+                            </h4>
+                            <p id="modalDescription" class="modal-section-text"></p>
+                        </div>
+
+                        <div class="modal-grid">
+                            <div class="modal-section">
+                                <h4 class="modal-section-title"><i class="fa-solid fa-triangle-exclamation"></i> Problem
+                                    Statement</h4>
+                                <p id="modalProblem" class="modal-section-text"></p>
+                            </div>
+                            <div class="modal-section">
+                                <h4 class="modal-section-title"><i class="fa-solid fa-lightbulb"></i> Proposed Solution
+                                </h4>
+                                <p id="modalSolution" class="modal-section-text"></p>
+                            </div>
+                        </div>
+
+                        <div class="modal-section">
+                            <h4 class="modal-section-title"><i class="fa-solid fa-code"></i> Technologies Used</h4>
+                            <div id="modalTechnologies" class="modal-tech-list"></div>
+                        </div>
+
+                        <div class="modal-grid">
+                            <div class="modal-section">
+                                <h4 class="modal-section-title"><i class="fa-solid fa-bolt"></i> Key Features</h4>
+                                <ul id="modalFeatures" class="modal-feature-list"></ul>
+                            </div>
+                            <div class="modal-section">
+                                <h4 class="modal-section-title"><i class="fa-solid fa-screwdriver-wrench"></i>
+                                    Challenges & Learnings</h4>
+                                <p id="modalChallenges" class="modal-section-text"></p>
+                            </div>
+                        </div>
+
+                        <div class="modal-section">
+                            <h4 class="modal-section-title"><i class="fa-solid fa-forward"></i> Future Scope</h4>
+                            <p id="modalFuture" class="modal-section-text"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script src="ai-voice.js"></script>
         <script src="ai-chat.js"></script>
 </body>
